@@ -4,12 +4,19 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "start": "node airport.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "colors": "^1.4.0",
+    "colors.js": "^1.2.4",
     "express": "^4.17.1",
-    "loadash": "^1.0.0"
+    "lodash": "^4.17.15",
+    "string-format": "git+https://github.com/davidchambers/string-format.git"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.2"
   }
 }
