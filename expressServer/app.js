@@ -2,7 +2,6 @@ var express = require("express");
 var app = express();
 var _ = require("lodash");
 
-
 // to support json encoded bodies
 app.use(express.json());
 

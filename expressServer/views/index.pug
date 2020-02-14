@@ -1,0 +1,14 @@
+html
+  head
+    title #{title}
+  body
+    h1 #{message}
+  if friends == 0
+    p No Friends
+  else
+    p #{friends} Friends
+
+  div test #{message}
+    ul
+      - for( i=1; i<=count; i++)
+          li #{i}

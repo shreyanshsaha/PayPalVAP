@@ -1,0 +1,24 @@
+html
+  head
+    title Form
+  body
+    h1 User Form
+    if data
+      p
+        b Query Data: 
+        span #{data.userUsername}, #{data.userPassword}
+    form(action="", method="post")
+      table
+        tr
+          td
+            p Username:
+          td
+            input(type="text", name="userUsername")
+        tr
+          td
+            p Password:
+          td
+            input(type="password", name="userPassword")
+        tr
+          td
+            input(type="submit", value="Submit")
