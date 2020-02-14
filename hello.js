@@ -1,6 +1,5 @@
-
 function hello(name){
 	console.log(name);
 }
 
-module.exports = {a: hello, b: "name"};
+module.exports = {functionName: hello, param: "name"};
