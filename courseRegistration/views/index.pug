@@ -1,0 +1,55 @@
+html
+  head
+    title Index Page
+    script(src='https://code.jquery.com/jquery-3.1.1.min.js', crossorigin='anonymous')
+    link(rel='stylesheet', href='https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css')
+    script(src='https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js')
+
+  body
+    .ui.container
+    .ui.raised.very.padded.text.container.segment
+      h1.ui.header Login
+      .ui.two.column.grid
+        .ui.four.width.column.center.aligned
+          a(href="/login/student")
+            .ui.animated.blue.fluid.button.large(tabindex='0')
+              .visible.content Student
+              .hidden.content
+                span Login
+                i.right.arrow.icon
+        .ui.four.width.column.center.aligned
+          a(href="/login/professor")
+            .ui.animated.teal.fluid.button.large(tabindex='0')
+              .visible.content Professor
+              .hidden.content
+                span Login
+                i.right.arrow.icon
+      .ui.horizontal.section.divider OR REGISTER
+      form(action="/register", method="post")
+        .ui.two.column.grid.stackable
+          .ui.column
+            .ui.input 
+              input(type="text", name="username", placeholder="Username")
+          .ui.column
+            .ui.input 
+              input(type="password", name="password", placeholder="Password")
+          .ui.column
+            .ui.input 
+              input(type="text", name="id", placeholder="ID")
+          .ui.column
+            .ui.input 
+              input(type="text", name="name", placeholder="Name")
+        .ui.horizontal.divider
+        .ui.columns
+            .ui.buttons
+              input.ui.button.blue(type="submit", value="As Student", name="student")
+              .or.color.blue
+              input.ui.button.teal(type="submit", value="As Professor", name="professor")
+
+
+//- <div class="ui animated button" tabindex="0">
+//-   <div class="visible content">Next</div>
+//-   <div class="hidden content">
+//-     <i class="right arrow icon"></i>
+//-   </div>
+//- </div>

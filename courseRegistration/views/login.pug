@@ -1,0 +1,22 @@
+html
+  head
+    title Index Page
+    script(src='https://code.jquery.com/jquery-3.1.1.min.js', crossorigin='anonymous')
+    link(rel='stylesheet', href='https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css')
+    script(src='https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js')
+  body    
+    .ui.container
+    .ui.raised.very.padded.text.container.segment
+      form(action="", method="post")
+        .ui.one.column.grid
+          .ui.column
+            .ui.input 
+              input(type="text", name="username", placeholder="Username")
+          .ui.column
+            .ui.input 
+              input(type="password", name="password", placeholder="Password")
+          .ui.column
+            input.ui.button.blue(type="submit", value="Submit")
+            a(href="/")
+              .ui.button.basic.green(tabindex=0)
+                .content Home
