@@ -20,12 +20,16 @@ app.get("/", function (req, res) {
 });
 
 app.get("/login/student", function (req, res) {
-  res.render("login");
+  res.render("login", {
+    loginType:"Student Login",
+  });
 });
 
 app.post("/login/student", function (req, res) {
   console.log(req.body);
-  res.render("login");
+  res.render("login", {
+    loginType:"Student Login",
+  });
 });
 
 app.post("/register", function (req, res) {
@@ -33,7 +37,6 @@ app.post("/register", function (req, res) {
   if (
     !req.body.username ||
     !req.body.password ||
-    !req.body.id ||
     !req.body.name
   )
     return errorPrint("Incomplete Data");
@@ -50,8 +53,14 @@ app.post("/register", function (req, res) {
 });
 
 app.get("/login/professor", function (req, res) {
-  res.render("login");
+  res.render("login",{
+    loginType:"Professor Login",
+  });
 });
+
+app.get("/student", function(req, res){
+  res.render("student");
+})
 
 app.get("/", function (req, res) {
   res.render("index");
