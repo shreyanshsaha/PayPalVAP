@@ -3,7 +3,9 @@ const bodyParser = require("body-parser");
 
 const { debugPrint, errorPrint, infoPrint } = require("./printFunction")
 const middleware = require("./middleware");
-const {addToFile} = require("./fileHandling");
+const {addStudent} = require("./student");
+const {addProfessor}=require("./professor");
+
 const app = express();
 
 app.set("view engine", "pug");
@@ -21,44 +23,62 @@ app.get("/", function (req, res) {
 
 app.get("/login/student", function (req, res) {
   res.render("login", {
-    loginType:"Student Login",
+    loginType: "Student Login",
   });
 });
 
 app.post("/login/student", function (req, res) {
   console.log(req.body);
   res.render("login", {
-    loginType:"Student Login",
+    loginType: "Student Login",
   });
 });
 
 app.post("/register", function (req, res) {
-  debugPrint('Register: '+JSON.stringify(req.body));
+  debugPrint('Register: ' + JSON.stringify(req.body));
   if (
     !req.body.username ||
     !req.body.password ||
     !req.body.name
   )
     return errorPrint("Incomplete Data");
-  if(req.body.student)
-    addToFile("data/student.dat", JSON.stringify(req.body))
-      .then(()=>res.send("Updated student"))
-      .catch((err)=>errorPrint(err, res));
-  else if(req.body.professor)
-    addToFile("data/professor.dat", JSON.stringify(req.body))
-    .then(()=>res.send("Updated professor"))
-    .catch((err)=>errorPrint(err, res));
-  else
+
+  let userData = {}
+  userData.username = req.body.username;
+  userData.password = req.body.password;
+  userData.name = req.body.name;
+  userData.courses = []
+
+  if (req.body.student) {
+    userData.type = "student";
+    addStudent(userData)
+    .then(()=>{
+      debugPrint("Student added");
+      res.send("Student Added<br>"+JSON.stringify(userData))
+    })
+    .catch((err)=>errorPrint(err,res));
+  }
+  else if (req.body.professor) {
+    userData.type = "professor";
+    addProfessor(userData)
+    .then(() => {
+      debugPrint("Professor added");
+      res.send("Professor Added<br>"+JSON.stringify(userData))
+    })
+    .catch((err) => errorPrint(err, res))
+  }
+  else {
     errorPrint("Invalid Type", res);
+  }
 });
 
 app.get("/login/professor", function (req, res) {
-  res.render("login",{
-    loginType:"Professor Login",
+  res.render("login", {
+    loginType: "Professor Login",
   });
 });
 
-app.get("/student", function(req, res){
+app.get("/student", function (req, res) {
   res.render("student");
 })
 

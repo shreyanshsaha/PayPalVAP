@@ -11,7 +11,8 @@ function infoPrint(str){
 }
 
 function errorPrint(str, res){
-  console.log(colors.red(appname+str));
+  error = new Error(str)
+  console.log(colors.red(appname+error.stack));
   if(res)
     res.send(str);
 }

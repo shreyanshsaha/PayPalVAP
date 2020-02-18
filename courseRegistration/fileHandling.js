@@ -20,20 +20,20 @@ function searchFile(filename, value, property = 'username') {
   return new Promise((resolve, reject) => {
     getDataAsArray(filename)
       .then((dataframe) => {
-        let userDetails = _.filter(dataframe, (row)=>{
+        let objectDetails = _.filter(dataframe, (row) => {
           return row[property] == value;
         });
         // console.log(userDetails);
-        if(userDetails)
-          userDetails = userDetails[0];
-        resolve(userDetails);
+        if (objectDetails)
+          objectDetails = objectDetails[0];
+        resolve(objectDetails);
       })
       .catch((err) => reject(new Error(err)));
 
   });
 }
 
-function addToFile(filename, userData, ifNotExists = true) {
+function addToFile(filename, userData, ifNotExists = true, primaryKey = 'username') {
   return new Promise((resolve, reject) => {
     if (!(typeof userData == "string"))
       return reject(new Error("Invalid Data, String expected"));
@@ -45,9 +45,9 @@ function addToFile(filename, userData, ifNotExists = true) {
           for (let i = 0; i < lines.length; i++) {
             if (lines[i].length <= 0)
               continue;
-            if (JSON.parse(lines[i])['username'] == tempUserData.username) {
+            if (JSON.parse(lines[i])[primaryKey] == tempUserData[primaryKey]) {
               // console.log(JSON.parse(lines[i])['username'], tempUserData.username)
-              throw new Error("Username already exists!");
+              throw new Error(primaryKey + " already exists in " + filename);
             }
           }
           return [];
