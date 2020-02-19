@@ -1,6 +1,7 @@
 const fs = require("fs");
 const util = require("util");
 const _ = require("lodash");
+const { debugPrint, errorPrint, infoPrint } = require("./printFunction")
 
 /*
 NOTE:
@@ -63,7 +64,7 @@ function addToFile(filename, userData, ifNotExists = true, primaryKey = 'usernam
 }
 
 function updateData(filename, newData, checkProperty = 'username') {
-  // TODO: Right now username cannot be changed, fix it
+  // TODO: Right now username cannot be changed, fix it by adding _id
   return new Promise((resolve, reject) => {
     if (!(typeof newData == "string"))
       return reject(new Error("Invalid Data, String expected"));
@@ -86,6 +87,7 @@ function updateData(filename, newData, checkProperty = 'username') {
         writeFileStream.end();
       })
       .then(() => resolve(renameFile(tempFileName, filename)))
+      .then(infoPrint("Updated: "+JSON.parse(newData)[checkProperty]+" in "+filename))
       .catch((err) => reject(new Error(err)));
 
   });
@@ -108,16 +110,17 @@ function deleteData(filename, dataToDelete, checkProperty = 'username') {
         for (let i = 0; i < lines.length; i++) {
           if (lines[i].length <= 0)
             continue;
-          console.log(lines);
+          // console.log(lines);
           // console.log(lines[i], tempData[checkProperty]);
           if (JSON.parse(lines[i])[checkProperty] != tempData[checkProperty]) {
-            console.log(lines[i], tempData[checkProperty]);
+            // console.log(lines[i], tempData[checkProperty]);
             writeFileStream.write(lines[i] + "\n");
           }
         }
         writeFileStream.end();
       })
       .then(() => {
+        infoPrint(dataToDelete+" deleted from file "+filename);
         renameFile(tempFileName, filename);
       })
       .catch((err) => reject(new Error(err)))

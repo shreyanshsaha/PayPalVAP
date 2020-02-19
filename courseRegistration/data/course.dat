@@ -1,2 +1,1 @@
-{"courseID":"CSE0001","name":"Basic Programming","slot":"A","students":["student3"],"professors":["P0001"],"createdBy":"P0001"}
-{"courseID":"CSE0002","name":"Basic Programming in C","slot":"B","students":["student3"],"professors":["P0001"],"createdBy":"P0001"}
+{"courseID":"CSE0002","name":"Basic Programming in C","slot":"B","students":[],"professor":"P0001","createdBy":"P0001"}
