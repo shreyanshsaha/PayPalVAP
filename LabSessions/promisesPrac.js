@@ -17,6 +17,7 @@ var fs = require("fs");
 
 // const readFile = util.promisify(fs.readFile);
 
+
 function readFile(filename, encodingType) {
   let promise = new Promise((resolve, reject) => {
     fs.readFile(filename, encodingType, (err, data) => {
@@ -34,12 +35,32 @@ const promise = readFile('file3.json', 'utf-8');
 // promise.catch((err) => { console.log(err) });
 // promise.finally(()=>{console.log('done')});
 
-promise.then((data) => {
-  console.log(data);
-})
-  .catch((err) => {
-    console.log(err);
-  })
-  .finally(() => {
-    console.log("Done");
-  });
+// promise.then((data) => JSON.parse(data)).then((data) => {
+//   console.log(data);
+// }).catch((err) => {
+//   console.log(err);
+// }).finally(() => {
+//   console.log("Done");
+// });
+
+
+// function delay(seconds){
+//   return new Promise((resolve, reject)=>{
+//     setTimeout(()=>{resolve(seconds)}, seconds*1000);
+//   })
+//   // return promise;
+// }
+
+// delay(1).then((s)=>console.log(`Done Delay for ${s}s`));
+
+
+var promiseAll = Promise.all([
+  readFile("file3.json", 'utf-8'),
+  readFile("file3.json", 'utf-8'),
+  readFile("file4.json", 'utf-8'),
+]);
+
+promiseAll
+  .then((data)=>JSON.parse.apply(null, data))
+  .then((data)=>console.log(data))
+  .catch((err)=>console.log(err));
