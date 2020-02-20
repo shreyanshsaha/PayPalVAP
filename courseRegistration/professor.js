@@ -42,7 +42,7 @@ function createCourse(professorObj, courseObj) {
     throw new Error("CourseObj missing required properties");
 
 
-  if (!/^[A-Za-z]{3}[0-4]{4}$/.test(courseObj.courseID))
+  if (!/^[A-Za-z]{3}[0-9]{4}$/.test(courseObj.courseID))
     throw new Error("Invalid courseID format");
 
   if (["A", "B", "C", "D", "E", "F"].indexOf(courseObj.slot) < 0)
@@ -60,6 +60,7 @@ function createCourse(professorObj, courseObj) {
     "courses": professorObj.courses,
     "type": professorObj.type,
     "_id": professorObj._id,
+    "createdOn":professorObj.createdOn,
   }
 
   courseObj.students = [];
@@ -122,6 +123,7 @@ function deregisterCourse(professorObj, courseID) {
           "courses": professorObj.courses,
           "type": professorObj.type,
           "_id": professorObj._id,
+          "createdOn":professorObj.createdOn,
         }
         await updateData("./data/professor.dat", JSON.stringify(updatedProfessorObj))
         return professorObj;

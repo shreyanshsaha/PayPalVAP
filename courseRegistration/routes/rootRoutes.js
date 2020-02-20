@@ -1,4 +1,5 @@
 var express = require("express");
+const url=require("url");
 var router = express.Router();
 const middleware = require("../middleware");
 const { debugPrint, errorPrint, infoPrint } = require("../printFunction")
@@ -26,8 +27,10 @@ router.post("/register", function (req, res) {
     !req.body.name
   )
     return errorPrint("Incomplete Data", res);
-
-  if(!/^[A-Za-z0-9]{5, 20}$/.test(req.body.username) || !(/^[A-Za-z \.]+$/.test(req.body.name)) || req.body.password.length<6){
+    console.log(/^[A-Za-z0-9]{5, 20}$/.test(req.body.username));
+    console.log(/^[A-Za-z \.]+$/.test(req.body.name));
+    console.log(req.body.password.length<6);
+  if(!/^[A-Za-z0-9]{5,20}$/.test(req.body.username) || !/^[A-Za-z \.]+$/.test(req.body.name) || req.body.password.length<6){
     return res.redirect(url.format({
       pathname:"/",
       query: {

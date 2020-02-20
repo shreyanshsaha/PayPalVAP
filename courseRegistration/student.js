@@ -61,7 +61,8 @@ function registerCourse(studentObj, courseID, professorID) {
         "name": studentObj.name,
         "courses": studentObj.courses,
         "type": studentObj.type,
-        "_id": studentObj._id
+        "_id": studentObj._id,
+        "createdOn":studentObj.createdOn,
       }
 
       return [newStudentObj, courseObj];
@@ -76,7 +77,7 @@ function registerCourse(studentObj, courseID, professorID) {
       return courseObj;
     })
     .catch((err) => {
-      throw new Error(err.stack);
+      throw new Error(err);
     });
 }
 
@@ -124,7 +125,8 @@ function dropCourse(studentObj, courseID) {
     "name": studentObj.name,
     "courses": studentObj.courses,
     "type": studentObj.type,
-    "_id": studentObj._id
+    "_id": studentObj._id,
+    "createdOn":studentObj.createdOn,
   }
 
   return searchFile("./data/course.dat", courseID, '_id')

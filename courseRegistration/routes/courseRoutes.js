@@ -10,10 +10,6 @@ const { searchFile, getDataAsArray } = require("../fileHandling");
 const { createMessage } = require("../utility");
 const { getSlots } = require("../course");
 
-
-
-
-
 router.get("/course/register", middleware.isStudent, (req, res) => {
   getDataAsArray("./data/course.dat")
     .then(async (courseArray) => {

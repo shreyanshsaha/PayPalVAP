@@ -24,4 +24,5 @@ hr
           td
             i.caret.right.icon 
             b Joined on
-          td #{student.createdOn}
+          td 
+            = new Date(student.createdOn).toDateString()
