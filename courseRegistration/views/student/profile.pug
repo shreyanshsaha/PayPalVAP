@@ -1,0 +1,20 @@
+h1 Profile Details
+.ui.two.column.grid
+  .column
+    .ui.container.basic.segment
+      table.ui.table.large.very.basic
+        tr
+          td
+            i.caret.right.icon
+            b Name
+          td #{student.name}
+        tr
+          td 
+            i.caret.right.icon
+            b Username
+          td #{student.username}
+        tr
+          td
+            i.caret.right.icon 
+            b Number of courses registered
+          td #{student.courses.length}

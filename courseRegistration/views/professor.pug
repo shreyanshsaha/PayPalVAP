@@ -15,18 +15,18 @@ html
         a.item.active(data-tab='first') Profile
         a.item(data-tab='second') Courses
         a.item(data-tab='third') Edit
-        .right.menu.large
+        .right.menu
           a.ui.item(href="/logout") Logout 
             i.sign.out.alternate.icon
       .ui.bottom.attached.tab.segment.active(data-tab='first')
         .ui.container.padded.column
-          include student/profile.pug
+          include professor/profile.pug
       .ui.bottom.attached.tab.segment(data-tab='second')
-          include student/courses.pug
+          include professor/courses.pug
       .ui.bottom.attached.tab.segment(data-tab='third')
         | Third
 
+
   script(src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.js')
   script(src='https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.js')
-  script(src='https://semantic-ui.com/javascript/library/tablesort.js')
   script(src="script.js")

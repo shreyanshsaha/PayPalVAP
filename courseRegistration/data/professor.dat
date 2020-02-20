@@ -1,1 +1,4 @@
-{"username":"emp1","password":"password","id":"emp1","name":"shreyansh","professor":"As Professor"}
+{"username":"p0001","name":"professor 1","password":"password","courses":["876c5fc3adabcc6698c00b8157bd7bab","4a8a2db60a7ae4cf06fc892e208cd571"],"type":"professor","_id":"ec1d019fa24725d858bf8d723e026515"}
+{"username":"p0002","name":"professor 2","password":"password","courses":["9888e5d9ce1d29fc59c95a459bd3907d","635ca659240c2052554b0cf06e8dbce2","158b9ff1bfe708a2616ebf4f8af059f3"],"type":"professor","_id":"36ca0c2d07ae4ce1f109493a6d7c935a"}
+{"username":"p0003","name":"professor 3","password":"password","courses":["9876ff493578b02bf4e9f93863c97b6b","fc72727e93c6c9512db45c395f2b6493"],"type":"professor","_id":"61b26c0b7649d5fbcf050f3e331cc25b"}
+{"username":"p0004","name":"professor 4","password":"password","courses":["463e2910b3cd5338adc6c023f250fd9b","c873b47f19fe43061398571a410e1c10","30697f986a2eee4bc4770a745d2f02fc"],"type":"professor","_id":"42c3116d9d872960e248a805088783b9"}

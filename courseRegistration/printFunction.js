@@ -10,11 +10,12 @@ function infoPrint(str){
   console.log(colors.bold(colors.brightGreen(appname+str)));
 }
 
-function errorPrint(str, res){
-  error = new Error(str)
+function errorPrint(err){
+  error=err
+  if(!(err instanceof Error))
+    error = new Error(err)
+
   console.log(colors.red(appname+error.stack));
-  if(res)
-    res.send(str);
 }
 
 module.exports.debugPrint = debugPrint;

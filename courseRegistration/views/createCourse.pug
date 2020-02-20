@@ -1,0 +1,38 @@
+html
+  head
+    title Index Page
+    link(rel='stylesheet', href='https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css')
+  body
+    .ui.container
+    .ui.container.segment
+      a(href="/professor") 
+          i.ui.angle.left.icon 
+          span Dashboard
+
+      if message
+        .ui.message(class=message.type)
+          i.close.icon
+          .header #{message.header}
+          p #{message.text}
+
+      h1 Register new course
+      .ui.divider
+      form.ui.form.container.basic.segment(action="", method="post")
+        .field.required
+          label Course ID
+          input(type='text', name='courseID', placeholder='Course ID' required)
+        .field.required
+          label Course Name
+          input(type='text', name='name', placeholder='Course Name' required)
+        .field.required
+          label Course Slot
+          input(type='text', name='slot', placeholder='Course slot' required pattern="[ABCDEabcde]")
+        button.ui.button.primary(type='submit') Submit
+
+
+
+
+
+    script(src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.js')
+    script(src='https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.js')
+    script(src="/script.js")

@@ -1,0 +1,28 @@
+h1 Your courses
+if professor.courses.length <=0
+  .ui.warning.message
+    p You haven't created any courses yet!
+else
+  .ui.container
+    table.ui.table.single.line.unstackable
+      thead
+        tr
+          th Course ID
+          th Name
+          th Slot
+          th # Students
+          th
+      tbody
+        each course in professor.courseDetails
+          tr
+            td #{course.courseID}
+            td #{course.name}
+            td #{course.slot}
+            td #{course.students.length}
+            td
+              a.ui.button.red(href=`/course/delete/${course._id}`)
+                i.close.icon
+                | Drop
+
+.ui.divider
+a.ui.button.primary(href="/course/create") Create course

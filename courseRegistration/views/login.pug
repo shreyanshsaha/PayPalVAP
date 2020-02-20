@@ -7,6 +7,9 @@ html
   body    
     .ui.container
     .ui.raised.very.padded.text.container.segment
+      a(href="/professor") 
+        i.ui.angle.left.icon 
+        span Home
       h1 #{loginType}
       hr
       form.ui.form(action="", method="post")
@@ -16,8 +19,8 @@ html
         .ui.field.required
           label Password
           input(type="password", name="password", placeholder="Password" required)
-      .ui.column
-        input.ui.button.blue(type="submit", value="Submit")
-        a(href="/")
-          .ui.button.basic.green(tabindex=0)
-            .content Home
+        .ui.column
+          input.ui.button.blue(type="submit", value="Submit")
+          a(href="/")
+            .ui.button.basic.red(tabindex=0)
+              .content Cancel

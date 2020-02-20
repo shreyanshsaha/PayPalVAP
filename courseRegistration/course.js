@@ -13,7 +13,7 @@ async function getSlots(courses) {
   let courseDetails = await getDataAsArray("./data/course.dat");
 
   let studentCourses = _.filter(courseDetails, (eachCourse) => {
-    return courses.includes(eachCourse.courseID);
+    return courses.includes(eachCourse._id);
   })
   let slots = _.map(studentCourses, (element) => {
     return element.slot;

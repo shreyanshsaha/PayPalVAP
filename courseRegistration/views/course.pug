@@ -1,0 +1,52 @@
+html
+  head
+    title Index Page
+    link(rel='stylesheet', href='https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css')
+  body
+    //- .ui.container
+    .ui.container
+    .ui.container.segment
+      a(href="/student") 
+        i.ui.angle.left.icon 
+        span Dashboard
+
+      h1 Register new course
+      .ui.divider
+      .ui.right.action.left.icon.input
+        i.search.icon
+        input(type='text', placeholder='Search by courseID')
+        button.ui.button.green Search
+      .ui.horizontal.divider Select from list below
+      table.ui.table.single.line.unstackable.sortable
+        thead
+          tr
+            th Course ID
+            th Name
+            th Slot
+            th Professor
+            th.center.aligned Status
+        tbody
+          //- tr
+          //- td #{student.username}
+          each course in courses
+            tr
+              td #{course.courseID}
+              td #{course.name}
+              td #{course.slot}
+              td #{course.professorDetails.name}
+              
+              if student.courses.includes(course.courseID.toLowerCase())
+                td.positive.center.aligned
+                  b Registered
+              else if student.slots.includes(course.slot)
+                td.error.center.aligned
+                  b Slot clashes
+              else
+                td.center.aligned.selectable
+                  a.ui.blue(href=`/course/register/${course._id}/${course.professor}`) 
+                    b Register
+
+    script(src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.js')
+    script(src='https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.js')
+    script(src='https://semantic-ui.com/javascript/library/tablesort.js')
+    script(src="/script.js")

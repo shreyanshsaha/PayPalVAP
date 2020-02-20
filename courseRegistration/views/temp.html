@@ -1,0 +1,23 @@
+<html>
+
+<head>
+  <title>Index Page</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.css">
+</head>
+
+<body>
+  <div class="ui top attached tabular menu"><a class="item active" data-tab="first">First</a><a class="item"
+      data-tab="second">Second</a><a class="item" data-tab="third">Third</a></div>
+  <div class="ui bottom attached tab segment active" data-tab="first">First</div>
+  <div class="ui bottom attached tab segment" data-tab="second">Second</div>
+  <div class="ui bottom attached tab segment" data-tab="third">Third</div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.js"></script>
+  <script>
+    $(document).ready(function () {
+      $('.tabular.menu .item').tab({ history: false });
+    });
+  </script>
+</body>
+
+</html>

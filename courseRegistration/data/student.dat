@@ -1,5 +1,4 @@
-{"username":"17bce1148","password":"password","id":"17bce1148","name":"shreyansh","student":"As Student"}
-{"name":"Student2","username":"student2","password":"password","student":"As Student"}
-{"username":"student1","password":"password1","name":"student fullname"}
-{"username":"student5","password":"student5@123","name":"Student1","courses":[],"type":"student"}
-{"username":"student3","name":" Student 3","password":"password@123","courses":[],"type":"student","student":"As student"}
+{"username":"student1","password":"password","name":"student 1","courses":["4a8a2db60a7ae4cf06fc892e208cd571","158b9ff1bfe708a2616ebf4f8af059f3","9876ff493578b02bf4e9f93863c97b6b"],"type":"student","_id":"89806c49f8411c1ba08ccd6491be871b"}
+{"username":"student2","password":"password","name":"student 2","courses":["463e2910b3cd5338adc6c023f250fd9b","30697f986a2eee4bc4770a745d2f02fc","c873b47f19fe43061398571a410e1c10"],"type":"student","_id":"b846394a88f4405ad43781e29426b610"}
+{"username":"stuednt3","password":"password","name":"student 3","courses":["9888e5d9ce1d29fc59c95a459bd3907d","9876ff493578b02bf4e9f93863c97b6b","4a8a2db60a7ae4cf06fc892e208cd571","158b9ff1bfe708a2616ebf4f8af059f3"],"type":"student","_id":"389132eb95c53c95ade2bf5e849ff6c8"}
+{"username":"student4","password":"password","name":"student4","courses":[],"type":"student","_id":"5c6549aa17b16c1825da4852a4399928"}

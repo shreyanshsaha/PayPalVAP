@@ -2,6 +2,7 @@ const fs = require("fs");
 const util = require("util");
 const _ = require("lodash");
 const { debugPrint, errorPrint, infoPrint } = require("./printFunction")
+const crypto = require("crypto");
 
 /*
 NOTE:
@@ -17,7 +18,7 @@ const appendFile = util.promisify(fs.appendFile);
 const readFile = util.promisify(fs.readFile);
 const renameFile = util.promisify(fs.rename);
 
-function searchFile(filename, value, property = 'username') {
+function searchFile(filename, value, property = 'username', returnOne = true) {
   return new Promise((resolve, reject) => {
     getDataAsArray(filename)
       .then((dataframe) => {
@@ -25,8 +26,9 @@ function searchFile(filename, value, property = 'username') {
           return row[property] == value;
         });
         // console.log(userDetails);
-        if (objectDetails)
+        if (objectDetails && returnOne)
           objectDetails = objectDetails[0];
+
         resolve(objectDetails);
       })
       .catch((err) => reject(new Error(err)));
@@ -34,36 +36,40 @@ function searchFile(filename, value, property = 'username') {
   });
 }
 
-function addToFile(filename, userData, ifNotExists = true, primaryKey = 'username') {
+function addToFile(filename, userData, primaryKey = "_id") {
   return new Promise((resolve, reject) => {
     if (!(typeof userData == "string"))
       return reject(new Error("Invalid Data, String expected"));
-    if (ifNotExists) {
-      readFile(filename, 'utf-8')
-        .then((data) => {
-          let tempUserData = JSON.parse(userData);
-          let lines = data.split("\n");
-          for (let i = 0; i < lines.length; i++) {
-            if (lines[i].length <= 0)
-              continue;
-            if (JSON.parse(lines[i])[primaryKey] == tempUserData[primaryKey]) {
-              // console.log(JSON.parse(lines[i])['username'], tempUserData.username)
-              throw new Error(primaryKey + " already exists in " + filename);
-            }
+    if (!(typeof primaryKey == "string"))
+      return reject(new Error("Invalid key, String expected"));
+
+    readFile(filename, 'utf-8')
+      .then((data) => {
+        let tempUserData = JSON.parse(userData);
+        let _id = crypto.createHash('md5').update(userData).digest("hex");
+        tempUserData._id = _id;
+        let lines = data.split("\n");
+        for (let i = 0; i < lines.length; i++) {
+          if (lines[i].length <= 0)
+            continue;
+          if (JSON.parse(lines[i])[primaryKey] == tempUserData[primaryKey]) {
+            console.log(JSON.parse(lines[i]), tempUserData)
+            throw new Error(primaryKey + " already exists");
           }
-          return [];
-        })
-        .then(() => resolve(appendFile(filename, userData + "\n")))
-        .catch((err) => reject(new Error(err)));
-    }
-    else {
-      return resolve(appendFile(filename, userData + "\n"));
-    }
+        }
+        return JSON.stringify(tempUserData);
+      })
+      .then(async (userData) => {
+        await appendFile(filename, userData + "\n")
+        resolve(JSON.parse(userData));
+      })
+      .catch((err) => reject(err));
+
   });
 
 }
 
-function updateData(filename, newData, checkProperty = 'username') {
+function updateData(filename, newData, checkProperty = '_id') {
   // TODO: Right now username cannot be changed, fix it by adding _id
   return new Promise((resolve, reject) => {
     if (!(typeof newData == "string"))
@@ -87,16 +93,17 @@ function updateData(filename, newData, checkProperty = 'username') {
         writeFileStream.end();
       })
       .then(() => resolve(renameFile(tempFileName, filename)))
-      .then(infoPrint("Updated: "+JSON.parse(newData)[checkProperty]+" in "+filename))
+      .then(infoPrint("Updated: " + JSON.parse(newData)[checkProperty] + " in " + filename))
+      .then(() => resolve(newData))
       .catch((err) => reject(new Error(err)));
-
   });
 }
 
-function deleteData(filename, dataToDelete, checkProperty = 'username') {
+function deleteData(filename, dataToDelete, checkProperty = '_id') {
   return new Promise((resolve, reject) => {
     if (!(typeof dataToDelete == "string"))
       return reject(new Error("Invalid Data, String expected"));
+
     let tempFileName = filename + ".temp";
 
     readFile(filename, 'utf-8')
@@ -106,6 +113,8 @@ function deleteData(filename, dataToDelete, checkProperty = 'username') {
           throw new Error("Error creating temp file");
 
         let tempData = JSON.parse(dataToDelete);
+        if (!tempData._id)
+          throw new Error("_id required to delete");
         let lines = data.split("\n");
         for (let i = 0; i < lines.length; i++) {
           if (lines[i].length <= 0)
@@ -120,7 +129,7 @@ function deleteData(filename, dataToDelete, checkProperty = 'username') {
         writeFileStream.end();
       })
       .then(() => {
-        infoPrint(dataToDelete+" deleted from file "+filename);
+        infoPrint(dataToDelete + " deleted from file " + filename);
         renameFile(tempFileName, filename);
       })
       .catch((err) => reject(new Error(err)))

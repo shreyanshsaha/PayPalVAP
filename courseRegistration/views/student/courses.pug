@@ -1,0 +1,31 @@
+h1 Your Registered courses
+if student.courses.length <=0
+  .ui.warning.message
+    p You haven't registered any courses yet!
+else
+  .ui.container
+    table.ui.table.single.line.unstackable.sortable
+      thead
+        tr
+          th Course ID
+          th Name
+          th Slot
+          th Professor
+          th
+      tbody
+        each course in student.courseDetails
+          tr
+            td #{course.courseID}
+            td #{course.name}
+            td #{course.slot}
+            td #{course.professorDetails.name}
+            td
+              a.ui.button.red(href=`/course/drop/${course._id}`)
+                i.close.icon
+                | Drop
+
+.ui.divider
+a.ui.button.primary(href="/course/register") Register courses
+//- script(src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.js')
+//- script(src='https://semantic-ui.com/javascript/library/tablesort.js')
+//- script(src="script.js")
