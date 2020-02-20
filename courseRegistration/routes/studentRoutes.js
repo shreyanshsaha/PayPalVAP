@@ -1,12 +1,12 @@
 var express = require("express");
 var router = express.Router();
-const middleware = require("./middleware");
-const { debugPrint, errorPrint, infoPrint } = require("./printFunction")
-const { authenticateStudent, addStudent, registerCourse, deleteStudent, dropCourse } = require("./student");
-const { addProfessor, createCourse, deregisterCourse, deleteProfessor, authenticateProfessor } = require("./professor");
-const { searchFile, getDataAsArray } = require("./fileHandling");
-const { createMessage } = require("./utility");
-const { getSlots } = require("./course");
+const middleware = require("../middleware");
+const { debugPrint, errorPrint, infoPrint } = require("../printFunction")
+const { authenticateStudent, addStudent, registerCourse, deleteStudent, dropCourse } = require("../student");
+const { addProfessor, createCourse, deregisterCourse, deleteProfessor, authenticateProfessor } = require("../professor");
+const { searchFile, getDataAsArray } = require("../fileHandling");
+const { createMessage } = require("../utility");
+const { getSlots } = require("../course");
 
 
 function hashPassword(str) {
