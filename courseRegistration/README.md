@@ -12,7 +12,30 @@ The server runs on port 3000 which can be changes in [app.js](app.js)
 
 ![homepage](./assets/homepage.png)
 
-# Class diagram
+## Data description
+  - Student
+    - _id
+    - username
+    - password
+    - name
+    - courses
+    - type
+    - createdOn
+  - Professor
+    - _id
+    - username
+    - password
+    - name
+    - courses
+    - type
+    - createdOn
+  - Course
+    - _id
+    - courseID
+    - name
+    - slot
+    - students
+    - professor
 
 # Routes
 
@@ -93,6 +116,7 @@ Path: `/login/student`
 
 Method: `POST`
 
+[student.js](student.js)
 ```javascript
 router.post("/login/student", function (req, res) {
   authenticateStudent(escape(req.body.username), hashPassword(req.body.password))
@@ -165,7 +189,9 @@ When a **professor** clicks on create course they are redirected to this page. T
   - View all created course
   - De-register a course
 
-Registration page with sample course and slot
+**Registration page with sample course and slot**
+
+[createCourse.pug](views/createCourse.pug)
 ![createNewCourse](assets/registerNewCourse.png)
 
 Once they click on `Submit`, the data is submitted to `/course/create` as `POST`.
@@ -267,6 +293,8 @@ The student can click on Register Courses to register for a course.
 Path: `/course/register`
 
 Method: `GET`
+
+[course.pug](views/course.pug)
 
 **Registration page sorted by ID**
 ![studentCourses](assets/regPageID.png)
