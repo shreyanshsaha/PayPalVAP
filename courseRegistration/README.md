@@ -550,6 +550,8 @@ module.exports.debugPrint = debugPrint;
 module.exports.errorPrint = errorPrint;
 module.exports.infoPrint = infoPrint;
 ```
+## Promises & async/await
+Most of the functions in [student.js](student.js), [professor.js](professor.js), [fileHandling.js](fileHandling.js) use these concepts.
 
 # Appendix
 
