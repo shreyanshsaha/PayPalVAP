@@ -1,4 +1,6 @@
-h1 Your courses
+.ui.container.basic.segment
+  h1.ui.blue.header Your courses
+hr
 if professor.courses.length <=0
   .ui.warning.message
     p You haven't created any courses yet!
@@ -20,9 +22,11 @@ else
             td #{course.slot}
             td #{course.students.length}
             td
-              a.ui.button.red(href=`/course/delete/${course._id}`)
-                i.close.icon
-                | Drop
+              a.ui.animated.vertical.red.button(href=`/course/delete/${course._id}`)
+                .visible.content Delete
+                .hidden.content
+                  i.close.icon
 
 .ui.divider
-a.ui.button.primary(href="/course/create") Create course
+.ui.container
+  a.ui.button.primary(href="/course/create") Create course

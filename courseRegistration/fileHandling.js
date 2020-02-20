@@ -46,6 +46,7 @@ function addToFile(filename, userData, primaryKey = "_id") {
     readFile(filename, 'utf-8')
       .then((data) => {
         let tempUserData = JSON.parse(userData);
+        tempUserData.createdOn = Date.now();
         let _id = crypto.createHash('md5').update(userData).digest("hex");
         tempUserData._id = _id;
         let lines = data.split("\n");

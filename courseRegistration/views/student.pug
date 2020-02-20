@@ -14,7 +14,6 @@ html
       .ui.top.attached.tabular.menu
         a.item.active(data-tab='first') Profile
         a.item(data-tab='second') Courses
-        a.item(data-tab='third') Edit
         .right.menu.large
           a.ui.item(href="/logout") Logout 
             i.sign.out.alternate.icon
@@ -23,8 +22,7 @@ html
           include student/profile.pug
       .ui.bottom.attached.tab.segment(data-tab='second')
           include student/courses.pug
-      .ui.bottom.attached.tab.segment(data-tab='third')
-        | Third
+
 
   script(src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.js')
   script(src='https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.js')

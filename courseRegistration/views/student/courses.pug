@@ -1,10 +1,12 @@
-h1 Your Registered courses
+.ui.container.basic.segment
+  h1.ui.blue.header Your registered courses
+hr
 if student.courses.length <=0
   .ui.warning.message
     p You haven't registered any courses yet!
 else
-  .ui.container
-    table.ui.table.single.line.unstackable.sortable
+  .ui.container.basic.segment
+    table.ui.table.single.line.unstackable
       thead
         tr
           th Course ID
@@ -19,13 +21,19 @@ else
             td #{course.name}
             td #{course.slot}
             td #{course.professorDetails.name}
-            td
-              a.ui.button.red(href=`/course/drop/${course._id}`)
-                i.close.icon
-                | Drop
+            td.center.aligned
+              //- a.ui.button.red(href=`/course/drop/${course._id}`)
+              //-   i.close.icon
+              //-   | Drop
+              a.ui.animated.vertical.red.button(href="/login/professor")
+                .visible.content Drop
+                .hidden.content
+                  i.close.icon
+                
 
 .ui.divider
-a.ui.button.primary(href="/course/register") Register courses
+.ui.container
+  a.ui.button.primary(href="/course/register") Register courses
 //- script(src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.js')
 //- script(src='https://semantic-ui.com/javascript/library/tablesort.js')
 //- script(src="script.js")

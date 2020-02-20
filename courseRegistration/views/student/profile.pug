@@ -1,4 +1,6 @@
-h1 Profile Details
+.ui.container.basic.segment
+  h1.ui.blue.header Profile Details
+hr
 .ui.two.column.grid
   .column
     .ui.container.basic.segment
@@ -18,3 +20,8 @@ h1 Profile Details
             i.caret.right.icon 
             b Number of courses registered
           td #{student.courses.length}
+        tr
+          td
+            i.caret.right.icon 
+            b Joined on
+          td #{student.createdOn}

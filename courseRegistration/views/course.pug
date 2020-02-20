@@ -14,8 +14,8 @@ html
       .ui.divider
       .ui.right.action.left.icon.input
         i.search.icon
-        input(type='text', placeholder='Search by courseID')
-        button.ui.button.green Search
+        input#courseIDSearch(type='text', placeholder='Search by courseID')
+        button.ui.button.green(onclick="filterRows()") Search
       .ui.horizontal.divider Select from list below
       table.ui.table.single.line.unstackable.sortable
         thead
@@ -50,3 +50,9 @@ html
     script(src='https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.js')
     script(src='https://semantic-ui.com/javascript/library/tablesort.js')
     script(src="/script.js")
+    script.
+      function filterRows(){
+        var courseID = document.getElementById("courseIDSearch").value;
+        window.location.href="/course/register?courseID="+courseID;
+        
+      }

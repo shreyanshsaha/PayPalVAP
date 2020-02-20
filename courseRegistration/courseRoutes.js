@@ -1,4 +1,6 @@
 var express = require("express");
+const _ = require("lodash");
+
 var router = express.Router();
 const middleware = require("./middleware");
 const { debugPrint, errorPrint, infoPrint } = require("./printFunction")
@@ -19,6 +21,10 @@ router.get("/course/register", middleware.isStudent, (req, res) => {
         courseArray[i].professorDetails = await searchFile("./data/professor.dat", courseArray[i].professor, '_id', true);
       console.log("/course/register", req.session.user);
       // res.send(req.session.user);
+      if (req.query.courseID)
+        courseArray = _.filter(courseArray, (element) => {
+          return element.courseID == req.query.courseID.toLowerCase();
+        });
       return res.render("course", {
         courses: courseArray,
         student: req.session.user
