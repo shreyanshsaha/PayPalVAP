@@ -12,7 +12,6 @@ const { getSlots } = require("../course");
 
 router.get("/", function (req, res) {
   let registerError = req.query.regError;
-  // registerError = "sample error";
   res.render("index", {
     registerError,
   });

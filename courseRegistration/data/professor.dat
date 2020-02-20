@@ -3,3 +3,4 @@
 {"username":"p0003","name":"professor 3","password":"password","courses":["9876ff493578b02bf4e9f93863c97b6b","fc72727e93c6c9512db45c395f2b6493"],"type":"professor","_id":"61b26c0b7649d5fbcf050f3e331cc25b"}
 {"username":"p0004","name":"professor 4","password":"password","courses":["463e2910b3cd5338adc6c023f250fd9b","c873b47f19fe43061398571a410e1c10","30697f986a2eee4bc4770a745d2f02fc"],"type":"professor","_id":"42c3116d9d872960e248a805088783b9"}
 {"username":"pr0001","name":"prof. ramesh","password":"password","courses":[],"type":"professor","_id":"2aea5459a347f7e08e16c94c0f28dd2e","createdOn":1582200588086}
+{"username":"ps0001","name":"prof. peter","password":"password","courses":["4a76e6b505f2e1e5d463d7d11c4e9a3f","8bb50a55c6eb92caf331e100d5cf7a30"],"type":"professor","_id":"2ee1b747d1fa1737de3f54a2f1acd8b1","createdOn":1582219575276}

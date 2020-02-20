@@ -71,7 +71,6 @@ function addToFile(filename, userData, primaryKey = "_id") {
 }
 
 function updateData(filename, newData, checkProperty = '_id') {
-  // TODO: Right now username cannot be changed, fix it by adding _id
   return new Promise((resolve, reject) => {
     if (!(typeof newData == "string"))
       return reject(new Error("Invalid Data, String expected"));

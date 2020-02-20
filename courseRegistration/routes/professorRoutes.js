@@ -8,8 +8,6 @@ const { searchFile, getDataAsArray } = require("../fileHandling");
 const { createMessage } = require("../utility");
 const { getSlots } = require("../course");
 
-
-
 function hashPassword(str) {
   return escape(str);
 }
@@ -36,8 +34,9 @@ router.post("/login/professor", function (req, res) {
       res.redirect("/professor");
     })
     .catch((err) => {
-      errorPrint(err);
-      res.send(err.message);
+      errorPrint(err.stack);
+      req.session.mesage = err.message;
+      res.redirect("/professor");
     })
 });
 

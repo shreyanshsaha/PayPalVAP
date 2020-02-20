@@ -69,32 +69,6 @@ router.get("/course/drop/:courseID", middleware.isStudent, (req, res) => {
     });
 });
 
-
-// router.get("/course/drop/:courseID", middleware.isStudent, (req, res) => {
-//   message = req.session.message;
-//   dropCourse(req.session.user, req.params.userID)
-//   .then(()=>{
-//     // drop from courses
-//     _.remove(req.session.user.course, (element)=>{
-//       return element == req.params.courseID;
-//     });
-
-//     // drop from courseDetails
-//     // _.remove(req.session.user.courseDetails, (element)=>{
-//     //   return 
-//     // });
-//   })
-//   .catch((err)=>{
-//     req.session.message = createMessage("Registration Error", err.message, "error");
-//     res.redirect("/student");
-//   })
-//   // res.render("drop", {
-//   //   courseID: req.params.courseID,
-//   //   message: message,
-//   //   student:
-//   // });
-// });
-
 router.get("/course/create", middleware.isProfessor, function (req, res) {
   message = req.session.message;
   delete req.session.message;
@@ -132,7 +106,6 @@ router.post("/course/create", middleware.isProfessor, function (req, res) {
       res.redirect("/professor");
     })
 })
-
 
 router.get("/course/delete/:courseID", middleware.isProfessor, function (req, res) {
   if (!req.params.courseID) {

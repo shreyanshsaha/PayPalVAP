@@ -72,7 +72,7 @@ function createCourse(professorObj, courseObj) {
       professorObj['courses'].push(newCourseObj['_id']);
       updateData("./data/professor.dat", JSON.stringify(professorObj))
       return newCourseObj;
-    })
+    });
 }
 
 function deregisterCourse(professorObj, courseID) {

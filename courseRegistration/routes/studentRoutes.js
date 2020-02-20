@@ -37,8 +37,13 @@ router.post("/login/student", function (req, res) {
       res.redirect("/student");
     })
     .catch((err) => {
-      errorPrint(err);
-      res.send(err.message);
+      errorPrint(err.stack);
+      return res.redirect(url.format({
+        pathname:"/",
+        query: {
+          "regError": err.message,
+        },
+      }));
     })
 });
 
@@ -47,7 +52,7 @@ router.get("/student", middleware.isStudent, function (req, res) {
     return res.redirect("/");
   message = req.session.message;
   delete req.session.message;
-  console.log("/student", req.session.user);
+  debugPrint("/student", req.session.user);
   return res.render("student", {
     student: req.session.user,
     message: message,

@@ -4,7 +4,8 @@
   "description": "A course registration app for students",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.js"
   },
   "author": "Shreyansh Saha",
   "license": "ISC",
