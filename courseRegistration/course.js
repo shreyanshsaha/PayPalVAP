@@ -10,14 +10,17 @@ async function getSlots(courses) {
 
   if (courses.length <= 0)
     return [];
+
   let courseDetails = await getDataAsArray("./data/course.dat");
 
   let studentCourses = _.filter(courseDetails, (eachCourse) => {
     return courses.includes(eachCourse._id);
-  })
+  });
+
   let slots = _.map(studentCourses, (element) => {
     return element.slot;
   });
+  
   slots = _.uniq(slots);
 
   return slots;
