@@ -17,6 +17,7 @@ function hashPassword(str) {
 function addStudent(studentObj) {
   if (!studentObj.username || !studentObj.password)
     throw new Error("Username & password cannot be empty");
+
   return new Promise((resolve, reject) => {
     addToFile("./data/student.dat", JSON.stringify(studentObj), "username")
       .then((newStudentObj) => {
@@ -38,13 +39,11 @@ function registerCourse(studentObj, courseID, professorID) {
       infoPrint("Registering course " + courseID + " for student " + studentObj.username + " by professor " + professorID);
       if (courseObj == undefined)
         throw new Error("CourseID not found to register");
-      // courseObj = JSON.parse(courseObj);
 
-      console.log("Course find: ", _.find(studentObj.courseDetails, {"courseID": courseObj.courseID}));
+      console.log("Course find: ", _.find(studentObj.courseDetails, { "courseID": courseObj.courseID }));
 
-      if (_.find(studentObj.courseDetails, {"courseID": courseObj.courseID})!=undefined)
+      if (_.find(studentObj.courseDetails, { "courseID": courseObj.courseID }) != undefined)
         throw new Error("Course already registered");
-
 
       let slots = await getSlots(studentObj.courses)
       if (slots.includes(courseObj.slot))
@@ -62,7 +61,7 @@ function registerCourse(studentObj, courseID, professorID) {
         "courses": studentObj.courses,
         "type": studentObj.type,
         "_id": studentObj._id,
-        "createdOn":studentObj.createdOn,
+        "createdOn": studentObj.createdOn,
       }
 
       return [newStudentObj, courseObj];
@@ -85,19 +84,23 @@ function deleteStudent(studentObj) {
   if (!studentObj.username || !studentObj.password)
     throw new Error("Username & password cannot be empty");
 
+  // Delete student
   return deleteData("./data/student.dat", JSON.stringify(studentObj))
     .then(async () => {
       let courses = studentObj.courses;
+      // Remove student from each course
       for (let i = 0; i < courses.length; i++) {
         let courseObj = await searchFile("./data/course.dat", courses[i], 'courseID');
+
         if (!courseObj)
           reject(new Error("Course " + courses[i] + " cannot be found for student: " + studentObj.username));
-        // console.log(courseObj.students);
+          
         _.remove(courseObj.students, (element) => {
           return element == studentObj.username;
         });
+
+        // Update course with removed student
         try {
-          // console.log(courseObj);
           await updateData("./data/course.dat", JSON.stringify(courseObj), 'courseID');
         } catch (err) {
           throw new Error(err.stack);
@@ -126,7 +129,7 @@ function dropCourse(studentObj, courseID) {
     "courses": studentObj.courses,
     "type": studentObj.type,
     "_id": studentObj._id,
-    "createdOn":studentObj.createdOn,
+    "createdOn": studentObj.createdOn,
   }
 
   return searchFile("./data/course.dat", courseID, '_id')
@@ -143,35 +146,38 @@ function dropCourse(studentObj, courseID) {
 
       return [newStudentObj, courseObj];
     })
-    //TODO: Remove this
+    //TODO: Remove this.. why?
     .then(async (objList) => {
       await updateData("./data/student.dat", JSON.stringify(objList[0]));
-      await updateData("./data/course.dat", JSON.stringify(objList[1]))
+      await updateData("./data/course.dat", JSON.stringify(objList[1]));
+
       studentObj.courses = newStudentObj.courses;
-      _.remove(studentObj.courseDetails, (element)=>{
+      _.remove(studentObj.courseDetails, (element) => {
         return element._id == courseID;
       });
-      _.remove(studentObj.slots, (element)=>{
+
+      _.remove(studentObj.slots, (element) => {
         return element == objList[1].slot;
       });
+
       return studentObj;
     })
-    
-    // .then(infoPrint("Course " + courseID + " dropped for student " + studentObj.username))
     .catch((err) => { throw new Error(err.stack) })
 }
+
 
 function authenticateStudent(username, password) {
   if (!username || !password)
     throw new Error("Username or password empty");
   else if (username.length < 5 || password.length < 6)
     throw new Error("Invalid length input");
-  console.log(username.toLowerCase(), password);
+
   return getDataAsArray("./data/student.dat")
     .then((studentArray) => {
       let userDetails = _.find(studentArray, { 'username': username.toLowerCase(), 'password': password });
       if (!userDetails)
         throw new Error("Username and password not found");
+
       debugPrint("Authenticated user: " + userDetails.username);
       return userDetails;
     });
