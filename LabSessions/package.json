@@ -13,7 +13,7 @@
     "colors": "^1.4.0",
     "colors.js": "^1.2.4",
     "express": "^4.17.1",
-    "lodash": "^4.17.15",
+    "lodash": "^4.17.19",
     "node-fetch": "^2.6.0",
     "string-format": "git+https://github.com/davidchambers/string-format.git"
   },
