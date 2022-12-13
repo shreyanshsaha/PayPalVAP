@@ -12,7 +12,7 @@
   "dependencies": {
     "colors": "^1.4.0",
     "colors.js": "^1.2.4",
-    "express": "^4.17.1",
+    "express": "^4.17.3",
     "lodash": "^4.17.15",
     "node-fetch": "^2.6.0",
     "string-format": "git+https://github.com/davidchambers/string-format.git"
